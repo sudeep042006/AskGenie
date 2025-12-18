@@ -6,26 +6,24 @@ const API_BASE_URL = 'http://localhost:3000/api';
 // Central axios instance with a modest timeout
 const api = axios.create({ baseURL: API_BASE_URL });
 
+// Add request interceptor to attach token
+api.interceptors.request.use((config) => {
+    const storedUser = localStorage.getItem('askgenie_user');
+    if (storedUser) {
+        const { token } = JSON.parse(storedUser);
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+    }
+    return config;
+});
+
 export const chatbotApi = {
     // Create a new bot / crawl a URL. Backend expects: { url, userId, name }
-    createBot: async (data) => {
-        try {
-            return await api.post('/chatbot/create', data);
-        } catch (err) {
-            console.error('createBot error', err?.response?.data || err.message || err);
-            throw err;
-        }
-    },
+    createBot: (data) => api.post('/chatbot/create', data),
 
-    // Ask a question to the RAG backend. Backend expects { question, userId, chatbotId }
-    askQuestion: async (chatbotId, question, userId) => {
-        try {
-            return await api.post('/chat', { question, userId, chatbotId });
-        } catch (err) {
-            console.error('askQuestion error', err?.response?.data || err.message || err);
-            throw err;
-        }
-    },
+    // Chat with a bot. Backend expects: { question, userId, chatbotId }
+    sendMessage: (data) => api.post('/chat', data),
 
     // Fetches your previous bots for the "Grid" sidebar
     fetchUserBots: async (userId) => {

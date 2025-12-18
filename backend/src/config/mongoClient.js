@@ -8,7 +8,7 @@ dotenv.config();
 
 // Prefer a declared URI environment variable, but fall back to localhost for
 // convenience during development.
-const uri =  'mongodb://127.0.0.1:27017/mydb';
+const uri =  process.env.MONGODB_URI;
 
 try {
     // Ensure we await the connection so callers import after the connection is ready
