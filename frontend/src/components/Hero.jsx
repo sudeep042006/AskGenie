@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Search, Globe, ChevronRight, Zap, CheckCircle2, Loader2, Sparkles } from 'lucide-react';
+import { Search, Globe, ChevronRight, Zap, CheckCircle2, Loader2, Sparkles, AlertCircle } from 'lucide-react';
 import { chatbotApi } from '../services/api';
 
 export default function Hero({ onBotCreated, userId }) {
@@ -172,10 +172,10 @@ export default function Hero({ onBotCreated, userId }) {
             <div className="mt-8 grid gap-3 w-full">
               {STAGES.map((s, idx) => (
                 <div key={idx} className={`flex items-center gap-3 p-3 rounded-xl border transition-all duration-300 ${idx === stage
-                    ? 'bg-indigo-500/10 border-indigo-500/30 text-white'
-                    : idx < stage
-                      ? 'bg-slate-800/30 border-slate-800 text-slate-500'
-                      : 'bg-transparent border-transparent text-slate-600'
+                  ? 'bg-indigo-500/10 border-indigo-500/30 text-white'
+                  : idx < stage
+                    ? 'bg-slate-800/30 border-slate-800 text-slate-500'
+                    : 'bg-transparent border-transparent text-slate-600'
                   }`}>
                   {idx < stage ? (
                     <CheckCircle2 size={18} className="text-teal-400" />

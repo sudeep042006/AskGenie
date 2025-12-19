@@ -1,7 +1,12 @@
 import express from 'express';
 // We import functions from crawlController
 import { createChatbot, deleteChatbot } from '../controllers/crawlController.js';
-import { askQuestion } from '../controllers/chatController.js';
+import {
+    askQuestion,
+    createConversation,
+    getConversations,
+    getConversationMessages
+} from '../controllers/chatController.js';
 import Chatbot from '../models/chatbot.js'; // Import this to list the bots
 
 const router = express.Router();
@@ -37,5 +42,12 @@ router.post('/chat', askQuestion);
 // -------------------------------------------
 // Deletes from MongoDB and Supabase vectors
 router.delete('/chatbot/:chatbotId', deleteChatbot);
+
+// -------------------------------------------
+// 5. CONVERSATIONS: ChatGPT-style history
+// -------------------------------------------
+router.post('/conversation', createConversation);
+router.get('/conversations/:chatbotId/:userId', getConversations);
+router.get('/messages/:conversationId', getConversationMessages);
 
 export default router;

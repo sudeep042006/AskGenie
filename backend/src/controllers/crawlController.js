@@ -14,6 +14,8 @@ export async function createChatbot(req, res) {
         return res.status(400).json({ error: "URL is required" });
     }
 
+    let chatbotId;
+
     try {
         // --- 1. SAVE TO MONGODB FIRST ---
         // Create the record now so we have a valid ID to link from Supabase
@@ -24,7 +26,7 @@ export async function createChatbot(req, res) {
             status: 'processing'
         });
 
-        const chatbotId = newBot._id.toString();
+        chatbotId = newBot._id.toString();
         console.log(`✅ MongoDB Record Created: ${chatbotId}`);
 
         // --- 2. CRAWL & PROCESS ---

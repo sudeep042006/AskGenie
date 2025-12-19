@@ -15,6 +15,7 @@ api.interceptors.request.use((config) => {
             config.headers.Authorization = `Bearer ${token}`;
         }
     }
+    console.log(`📡 Sending [${config.method.toUpperCase()}] request to: ${config.url}`, config.data || '');
     return config;
 });
 
@@ -22,8 +23,13 @@ export const chatbotApi = {
     // Create a new bot / crawl a URL. Backend expects: { url, userId, name }
     createBot: (data) => api.post('/chatbot/create', data),
 
-    // Chat with a bot. Backend expects: { question, userId, chatbotId }
+    // Chat with a bot. Backend expects: { question, userId, chatbotId, conversationId }
     sendMessage: (data) => api.post('/chat', data),
+
+    // --- CONVERSATION APIs ---
+    startConversation: (userId, chatbotId) => api.post('/conversation', { userId, chatbotId }),
+    getConversations: (chatbotId, userId) => api.get(`/conversations/${chatbotId}/${userId}`),
+    getMessages: (conversationId) => api.get(`/messages/${conversationId}`),
 
     // Fetches your previous bots for the "Grid" sidebar
     fetchUserBots: async (userId) => {
