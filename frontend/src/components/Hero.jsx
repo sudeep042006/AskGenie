@@ -118,7 +118,7 @@ export default function Hero({ onBotCreated, userId }) {
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
                 placeholder="https://example.com"
-                className="flex-1 bg-transparent border-none text-white placeholder:text-slate-600 focus:ring-0 px-4 py-3 text-base"
+                className="flex-1 bg-transparent border-none outline-none text-white placeholder:text-slate-600 focus:ring-0 px-4 py-3 text-base"
                 required
               />
               <button

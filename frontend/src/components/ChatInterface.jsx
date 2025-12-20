@@ -272,7 +272,7 @@ const ChatInterface = () => {
                         {/* Magic focus glow */}
                         <div className="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-3xl opacity-0 group-focus-within:opacity-50 blur transition duration-500"></div>
 
-                        <div className="relative flex items-end gap-2 bg-slate-900 p-2 rounded-3xl border border-white/10 shadow-xl">
+                        <div className="relative flex items-end gap-2 bg-slate-900 p-2 rounded-3xl border-none shadow-xl">
                             <button onClick={handleNewChat} className="p-3 text-slate-400 hover:text-indigo-400 transition-colors hidden sm:block">
                                 <Plus size={20} />
                             </button>
@@ -283,7 +283,7 @@ const ChatInterface = () => {
                                 onKeyPress={(e) => e.key === 'Enter' && !e.shiftKey && (e.preventDefault(), handleSend())}
                                 placeholder="Ask Genie..."
                                 disabled={loading || answering}
-                                className="flex-1 bg-transparent border-none focus:ring-0 text-white placeholder:text-slate-500 py-3 max-h-32 min-h-[48px] resize-none"
+                                className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-white placeholder:text-slate-500 py-3 max-h-32 min-h-[48px] resize-none"
                                 rows={1}
                             />
 

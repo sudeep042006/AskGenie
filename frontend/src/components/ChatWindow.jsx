@@ -167,10 +167,10 @@ const ChatWindow = ({ chatbot, userId, onBack }) => {
 
               <div className={`max-w-[80%] sm:max-w-[70%] group relative`}>
                 <div className={`p-5 rounded-2xl text-[15px] leading-relaxed shadow-lg backdrop-blur-sm ${msg.role === 'user'
-                    ? 'bg-gradient-to-br from-indigo-600 to-purple-700 text-white rounded-tr-none'
-                    : msg.isError
-                      ? 'bg-red-500/10 border border-red-500/20 text-red-200 rounded-tl-none'
-                      : 'bg-slate-800/60 border border-white/10 text-gray-100 rounded-tl-none'
+                  ? 'bg-gradient-to-br from-indigo-600 to-purple-700 text-white rounded-tr-none'
+                  : msg.isError
+                    ? 'bg-red-500/10 border border-red-500/20 text-red-200 rounded-tl-none'
+                    : 'bg-slate-800/60 border border-white/10 text-gray-100 rounded-tl-none'
                   }`}>
                   {msg.role === 'ai' && msg.isTyping && isLast ? (
                     <TypewriterText text={msg.text} onComplete={() => handleTypingComplete(idx)} />
@@ -233,7 +233,7 @@ const ChatWindow = ({ chatbot, userId, onBack }) => {
               disabled={loading || answering}
               placeholder={loading || answering ? "Genie is answering..." : "Ask anything about the website..."}
               rows="1"
-              className="relative w-full px-5 py-4 bg-slate-950 text-white placeholder:text-slate-500 rounded-2xl border border-white/10 focus:outline-none focus:border-transparent focus:ring-0 resize-none disabled:opacity-50 disabled:cursor-not-allowed shadow-inner"
+              className="relative w-full px-5 py-4 bg-slate-950 text-white placeholder:text-slate-500 rounded-2xl border-none outline-none focus:ring-0 resize-none disabled:opacity-50 disabled:cursor-not-allowed shadow-inner"
               style={{
                 minHeight: '56px',
                 maxHeight: '150px'
@@ -245,8 +245,8 @@ const ChatWindow = ({ chatbot, userId, onBack }) => {
             onClick={handleSend}
             disabled={loading || answering || !input.trim()}
             className={`flex-shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-lg ${!loading && !answering && input.trim()
-                ? 'bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 hover:shadow-purple-500/40 hover:scale-105 active:scale-95 text-white'
-                : 'bg-slate-800 text-slate-600 cursor-not-allowed'
+              ? 'bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 hover:shadow-purple-500/40 hover:scale-105 active:scale-95 text-white'
+              : 'bg-slate-800 text-slate-600 cursor-not-allowed'
               }`}
           >
             {loading || answering ? (

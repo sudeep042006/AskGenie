@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Plus, LayoutGrid, Settings, HelpCircle, Trash2, MessageSquare, Clock, AlertCircle, LogOut, Zap } from 'lucide-react';
+import { Plus, LayoutGrid, Settings, HelpCircle, Trash2, MessageSquare, Clock, AlertCircle, LogOut } from 'lucide-react';
+import logo from '../assets/logo_ag_only.png';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -59,12 +60,21 @@ const Sidebar = ({ bots, onSelectBot, onNewChat, onDeleteBot, onLogout, isOpen, 
         <div className="glass-card rounded-[2rem] p-5 flex flex-col h-full bg-slate-900/60 backdrop-blur-2xl border border-white/10 shadow-2xl">
 
           {/* LOGO AREA */}
-          <div className="flex items-center gap-3 px-2 mb-8 pt-2">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/20">
-              <Zap className="text-white w-6 h-6 fill-current" />
+          <div className="flex flex-col items-center gap-1 px-1 mb-6 pt-4">
+            <div className="relative w-24 h-24 flex items-center justify-center mb-1">
+              <div className="absolute inset-0 bg-indigo-500/30 rounded-full blur-xl"></div>
+              <img
+                src={logo}
+                alt="AG"
+                style={{
+                  maskImage: 'radial-gradient(circle, black 50%, transparent 100%)',
+                  WebkitMaskImage: 'radial-gradient(circle, black 50%, transparent 100%)'
+                }}
+                className="relative w-full h-full object-contain mix-blend-screen hover:scale-110 transition-transform duration-300"
+              />
             </div>
-            <div>
-              <h1 className="font-bold text-lg tracking-tight text-white leading-none">ASK GENIE</h1>
+            <div className="text-center relative z-10">
+              <h1 className="font-bold text-xl tracking-tight text-white leading-none drop-shadow-md">ASK GENIE</h1>
               <span className="text-[10px] text-indigo-400 font-medium tracking-wider uppercase">AI Assistant</span>
             </div>
           </div>

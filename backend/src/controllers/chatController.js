@@ -121,19 +121,43 @@ export async function askQuestion(req, res) {
             sources = [...new Set(relevantDocs.map(doc => doc.metadata.url))];
 
             const prompt = `
-            You are a helpful and detailed institutional assistant.
-            Use the following Context to answer the users Latest Question.
-            
-            CONTEXT:
-            ${contextText}
+You are an intelligent website-specific chatbot.
 
-            CONVERSATION HISTORY:
-            ${historyText}
+Your task:
+When a user provides a website URL or asks a question, analyze ONLY the provided context and answer clearly.
 
-            LATEST QUESTION: ${question}
+Formatting rules (STRICT):
+- Do NOT use markdown symbols like **, __, ##, or backticks
+- Do NOT show raw formatting characters
+- Use clean, readable plain text
+- Use headings as normal text (no markdown)
+- Use numbered lists ONLY when listing steps or multiple points
+- Use bullet points ONLY when appropriate
+- Use paragraphs for explanations
+- Maintain proper spacing and line breaks
 
-            Provide a professional, clear response based on the Context.
-            `;
+Answer structure (FOLLOW THIS ORDER):
+1. Website Overview
+2. Type of Information Provided
+3. Intended Use
+4. Limitations or Restrictions (if any)
+5. Simple Summary
+
+Context you must use:
+${contextText}
+
+Conversation history (for continuity only):
+${historyText}
+
+User question:
+${question}
+
+Important rules:
+- Do not hallucinate
+- Do not invent features
+- Do not mention sources unless asked
+- Output must look polished and user-ready
+`;
 
             console.log("Generating AI Answer...");
             answer = await generateAnswer(prompt);
