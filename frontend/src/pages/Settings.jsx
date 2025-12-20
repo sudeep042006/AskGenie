@@ -6,7 +6,7 @@ export default function Settings() {
     const { user, logout } = useAuth();
 
     return (
-        <div className="h-full w-full overflow-y-auto bg-slate-950 p-4 md:p-8 relative">
+        <div className="h-full w-full overflow-y-auto bg-slate-950 p-4 pt-16 md:p-8 relative">
             {/* Background Effects */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none fixed">
                 <div className="absolute top-0 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-[100px] animate-pulse"></div>

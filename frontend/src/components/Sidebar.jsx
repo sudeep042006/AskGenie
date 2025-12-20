@@ -48,7 +48,7 @@ const Sidebar = ({ bots, onSelectBot, onNewChat, onDeleteBot, onLogout, isOpen, 
       {isOpen && (
         <div
           className="fixed inset-0 bg-black/60 backdrop-blur-sm z-30 md:hidden"
-          onClick={onClose}
+        /* onClick={onClose} - Removed to prevent auto-close on content click */
         />
       )}
 
@@ -135,15 +135,16 @@ const Sidebar = ({ bots, onSelectBot, onNewChat, onDeleteBot, onLogout, isOpen, 
                       </p>
                     </div>
 
-                    {hoveredBot === bot._id && (
-                      <button
-                        onClick={(e) => handleDeleteBot(bot._id, e)}
-                        disabled={deletingId === bot._id}
-                        className="p-1.5 text-slate-500 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
-                      >
-                        {deletingId === bot._id ? <div className="w-3 h-3 border-2 border-red-400/30 border-t-red-400 rounded-full animate-spin" /> : <Trash2 size={13} />}
-                      </button>
-                    )}
+                    <button
+                      onClick={(e) => handleDeleteBot(bot._id, e)}
+                      disabled={deletingId === bot._id}
+                      className={`p-1.5 text-slate-500 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all duration-200 
+                          ${deletingId === bot._id ? 'opacity-100' : 'opacity-100 md:opacity-0 md:group-hover:opacity-100'}
+                        `}
+                      aria-label="Delete chatbot"
+                    >
+                      {deletingId === bot._id ? <div className="w-3 h-3 border-2 border-red-400/30 border-t-red-400 rounded-full animate-spin" /> : <Trash2 size={13} />}
+                    </button>
                   </div>
                 </div>
               ))
