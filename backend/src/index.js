@@ -13,7 +13,10 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // 1. MIDDLEWARE
-app.use(cors());
+app.use(cors({
+    origin: true, // Allow all origins dynamically
+    credentials: true
+}));
 app.use(express.json());
 
 // Request Logger
