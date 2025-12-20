@@ -15,7 +15,7 @@ export async function crawlWebsite(url) {
 
     try {
         const crawlResponse = await app.crawlUrl(url, {
-            limit: 10,
+            limit: 100,
             scrapeOptions: {
                 formats: ['markdown'],
             },

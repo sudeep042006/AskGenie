@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Backend runs on port 3000 in this project (see backend/src/index.js)
-const API_BASE_URL = 'http://localhost:3000/api';
+const API_URL = import.meta.env.VITE_API_BASE_URL;
 
 // Central axios instance with a modest timeout
 const api = axios.create({ baseURL: API_BASE_URL });

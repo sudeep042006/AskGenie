@@ -56,10 +56,10 @@ export async function createChatbot(req, res) {
             if (page.content) page.content = null;   // Clear if alias exists
 
             // memory guard threshold (bytes) - lower to 2GB to enable earlier GC (assuming 4GB max)
-            const MEM_THRESHOLD = 5 * 1024 * 1024 * 1024; // 2GB
+            const MEM_THRESHOLD = 12 * 1024 * 1024 * 1024; // 2GB
 
             // Parallel processing configuration
-            const CONCURRENCY_LIMIT = 5; // Process 5 chunks at a time (speed vs memory trade-off)
+            const CONCURRENCY_LIMIT = 50; // Process 5 chunks at a time (speed vs memory trade-off)
 
             // Create a processing function for individual chunks
             const processChunk = async (chunk) => {
