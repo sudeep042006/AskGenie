@@ -4,7 +4,7 @@ import axios from 'axios';
 const API_URL = import.meta.env.VITE_API_BASE_URL;
 
 // Central axios instance with a modest timeout
-const api = axios.create({ baseURL: API_BASE_URL });
+const api = axios.create({ baseURL: API_URL });
 
 // Add request interceptor to attach token
 api.interceptors.request.use((config) => {
