@@ -34,9 +34,9 @@ function MainLayout() {
   };
 
   return (
-    <div className="relative h-screen w-screen flex overflow-hidden bg-slate-950 text-white">
+    <div className="relative h-[100dvh] w-screen flex overflow-hidden bg-slate-950 text-white">
       {/* Mobile Menu Button */}
-      <div className="absolute top-4 left-4 z-50 md:hidden">
+      <div className="absolute top-6 left-4 z-50 md:hidden">
         <button
           onClick={() => setMobileNavOpen(true)}
           className="p-2 bg-slate-900/80 backdrop-blur-md border border-white/10 rounded-lg text-white shadow-lg"

@@ -157,7 +157,7 @@ const ChatInterface = () => {
     }, [messages, loading, answering]);
 
     return (
-        <div className="flex h-screen w-full bg-slate-950 text-white overflow-hidden relative">
+        <div className="flex h-full w-full bg-slate-950 text-white overflow-hidden relative">
 
             {/* --- HISTORY SIDEBAR (Optional/Collapsible) --- */}
             <div className={`fixed inset-y-0 left-0 w-64 bg-slate-900 border-r border-white/5 transform transition-transform duration-300 z-30 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:relative lg:translate-x-0 lg:flex lg:flex-col`}>
@@ -189,7 +189,7 @@ const ChatInterface = () => {
                 {/* Toggle History Button (Mobile) */}
                 <button
                     onClick={() => setSidebarOpen(!sidebarOpen)}
-                    className={`absolute top-4 left-16 z-40 lg:hidden p-2 rounded-lg bg-slate-800 text-slate-400`}
+                    className={`absolute top-6 left-16 z-40 lg:hidden p-2 rounded-lg bg-slate-800 text-slate-400`}
                 >
                     <History size={20} />
                 </button>
@@ -266,8 +266,8 @@ const ChatInterface = () => {
                     <div ref={scrollRef} className="h-4" />
                 </div>
 
-                {/* Input Area */}
-                <div className="p-4 md:p-6 bg-slate-950 border-t border-white/5">
+                {/* Input Area - Added extra pb for mobile safety */}
+                <div className="p-4 pb-8 md:p-6 bg-slate-950 border-t border-white/5">
                     <div className="max-w-4xl mx-auto relative group">
                         {/* Magic focus glow */}
                         <div className="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-3xl opacity-0 group-focus-within:opacity-50 blur transition duration-500"></div>
