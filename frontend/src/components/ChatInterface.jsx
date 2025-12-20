@@ -161,7 +161,7 @@ const ChatInterface = () => {
 
             {/* --- HISTORY SIDEBAR (Optional/Collapsible) --- */}
             <div className={`fixed inset-y-0 left-0 w-64 bg-slate-900 border-r border-white/5 transform transition-transform duration-300 z-30 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:relative lg:translate-x-0 lg:flex lg:flex-col`}>
-                <div className="p-4 border-b border-white/5 flex items-center justify-between">
+                <div className="p-4 pt-20 md:pt-4 border-b border-white/5 flex items-center justify-between">
                     <h3 className="font-bold text-slate-400 text-xs uppercase tracking-wider">Chat History</h3>
                     <button onClick={handleNewChat} className="p-2 bg-indigo-600 hover:bg-indigo-500 rounded-lg text-white transition-colors">
                         <Plus size={16} />
@@ -189,7 +189,7 @@ const ChatInterface = () => {
                 {/* Toggle History Button (Mobile) */}
                 <button
                     onClick={() => setSidebarOpen(!sidebarOpen)}
-                    className={`absolute top-6 left-16 z-40 lg:hidden p-2 rounded-lg bg-slate-800 text-slate-400`}
+                    className={`absolute top-6 left-20 z-40 lg:hidden p-2 rounded-lg bg-slate-800 text-slate-400`}
                 >
                     <History size={20} />
                 </button>
