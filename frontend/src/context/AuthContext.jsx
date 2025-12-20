@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { chatbotApi } from '../services/api';
 
+import { supabase } from '../supabaseClient';
+
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // Using the env var
 
 const AuthContext = createContext();
@@ -14,12 +16,48 @@ export function AuthProvider({ children }) {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Check local storage for existing session
+        // 1. Check local storage for legacy/backend session
         const storedUser = localStorage.getItem('askgenie_user');
         if (storedUser) {
             setUser(JSON.parse(storedUser));
         }
-        setLoading(false);
+
+        // 2. Check Supabase Session (OAuth recovery)
+        supabase.auth.getSession().then(({ data: { session } }) => {
+            if (session) {
+                const userData = {
+                    id: session.user.id,
+                    email: session.user.email,
+                    token: session.access_token,
+                    avatar_url: session.user.user_metadata.avatar_url,
+                    full_name: session.user.user_metadata.full_name
+                };
+                setUser(userData);
+                localStorage.setItem('askgenie_user', JSON.stringify(userData));
+            }
+            setLoading(false);
+        });
+
+        // 3. Listen for Auth Changes
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+            if (session) {
+                const userData = {
+                    id: session.user.id,
+                    email: session.user.email,
+                    token: session.access_token,
+                    avatar_url: session.user.user_metadata.avatar_url,
+                    full_name: session.user.user_metadata.full_name
+                };
+                setUser(userData);
+                localStorage.setItem('askgenie_user', JSON.stringify(userData));
+            } else {
+                // Only clear if we strictly want to sync with Supabase. 
+                // But mixed mode (Backend Auth + Supabase Auth) might be tricky.
+                // For now, if we explicitly sign out via Supabase, we clear.
+            }
+        });
+
+        return () => subscription.unsubscribe();
     }, []);
 
     const login = async (email, password) => {
@@ -51,6 +89,21 @@ export function AuthProvider({ children }) {
         }
     };
 
+    const signInWithGoogle = async () => {
+        try {
+            const { error } = await supabase.auth.signInWithOAuth({
+                provider: 'google',
+                options: {
+                    redirectTo: window.location.origin,
+                }
+            });
+            if (error) throw error;
+            return { success: true };
+        } catch (error) {
+            return { success: false, error: error.message };
+        }
+    };
+
     const register = async (email, password) => {
         try {
             const response = await fetch(`${API_BASE_URL}/auth/register`, {
@@ -71,7 +124,8 @@ export function AuthProvider({ children }) {
         }
     };
 
-    const logout = () => {
+    const logout = async () => {
+        await supabase.auth.signOut(); // Clear Supabase session
         setUser(null);
         localStorage.removeItem('askgenie_user');
     };
@@ -81,6 +135,7 @@ export function AuthProvider({ children }) {
         login,
         register,
         logout,
+        signInWithGoogle,
         loading
     };
 
