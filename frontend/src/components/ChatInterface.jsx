@@ -173,8 +173,8 @@ const ChatInterface = () => {
                             key={conv._id}
                             onClick={() => selectConversation(conv)}
                             className={`w-full text-left p-3 rounded-xl text-sm truncate transition-all ${activeConversation?._id === conv._id
-                                    ? 'bg-white/10 text-white'
-                                    : 'text-slate-400 hover:bg-white/5 hover:text-slate-200'
+                                ? 'bg-white/10 text-white'
+                                : 'text-slate-400 hover:bg-white/5 hover:text-slate-200'
                                 }`}
                         >
                             {conv.title || "New Conversation"}
@@ -189,7 +189,7 @@ const ChatInterface = () => {
                 {/* Toggle History Button (Mobile) */}
                 <button
                     onClick={() => setSidebarOpen(!sidebarOpen)}
-                    className={`absolute top-4 left-4 z-40 lg:hidden p-2 rounded-lg bg-slate-800 text-slate-400`}
+                    className={`absolute top-4 left-16 z-40 lg:hidden p-2 rounded-lg bg-slate-800 text-slate-400`}
                 >
                     <History size={20} />
                 </button>
@@ -223,8 +223,8 @@ const ChatInterface = () => {
                                 )}
 
                                 <div className={`max-w-[85%] md:max-w-[75%] px-6 py-4 rounded-3xl text-[15px] leading-7 shadow-sm ${isAI
-                                        ? 'bg-slate-800/50 text-slate-200 border border-white/5 rounded-tl-sm'
-                                        : 'bg-indigo-600 text-white rounded-tr-sm shadow-indigo-500/20'
+                                    ? 'bg-slate-800/50 text-slate-200 border border-white/5 rounded-tl-sm'
+                                    : 'bg-indigo-600 text-white rounded-tr-sm shadow-indigo-500/20'
                                     }`}>
                                     {isAI && msg.isTyping && isLast ? (
                                         <TypewriterText text={msg.content || msg.aiAnswer || ""} onComplete={() => setAnswering(false)} />
@@ -291,8 +291,8 @@ const ChatInterface = () => {
                                 onClick={handleSend}
                                 disabled={!input.trim() || loading || answering}
                                 className={`p-3 rounded-2xl transition-all ${input.trim()
-                                        ? 'bg-indigo-600 text-white hover:bg-indigo-500 hover:scale-105 shadow-lg shadow-indigo-500/30'
-                                        : 'bg-slate-800 text-slate-600'
+                                    ? 'bg-indigo-600 text-white hover:bg-indigo-500 hover:scale-105 shadow-lg shadow-indigo-500/30'
+                                    : 'bg-slate-800 text-slate-600'
                                     }`}
                             >
                                 <Send size={20} className={input.trim() ? 'ml-0.5' : ''} />
