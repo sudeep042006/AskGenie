@@ -217,14 +217,7 @@ const ChatInterface = () => {
                     {/* Gemini-Style Sliding Loader (Chat History) */}
                     {isFetchingHistory && (
                         <div className="w-full px-4 md:px-20 lg:px-40 mt-10">
-                            <div className="chat-history-loader" style={{
-                                width: '100%',
-                                height: '4px',
-                                background: 'linear-gradient(90deg, transparent, #6366f1, transparent)',
-                                backgroundSize: '200% 100%',
-                                animation: 'slide 1.5s infinite linear',
-                                borderRadius: '999px'
-                            }} />
+                            <div className="gemini-loader" />
                         </div>
                     )}
 
