@@ -170,7 +170,7 @@ const ChatWindow = ({ chatbot, userId, onBack }) => {
                   ? 'bg-gradient-to-br from-indigo-600 to-purple-700 text-white rounded-tr-none'
                   : msg.isError
                     ? 'bg-red-500/10 border border-red-500/20 text-red-200 rounded-tl-none'
-                    : 'bg-slate-800/60 border border-white/10 text-gray-100 rounded-tl-none'
+                    : 'bg-slate-800/60 border border-white/10 text-gray-100 rounded-tl-none text-justify [text-justify:inter-word] whitespace-pre-line'
                   }`}>
                   {msg.role === 'ai' && msg.isTyping && isLast ? (
                     <TypewriterText text={msg.text} onComplete={() => handleTypingComplete(idx)} />

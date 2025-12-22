@@ -223,7 +223,7 @@ const ChatInterface = () => {
                                 )}
 
                                 <div className={`max-w-[85%] md:max-w-[75%] px-6 py-4 rounded-3xl text-[15px] leading-7 shadow-sm ${isAI
-                                    ? 'bg-slate-800/50 text-slate-200 border border-white/5 rounded-tl-sm'
+                                    ? 'bg-slate-800/50 text-slate-200 border border-white/5 rounded-tl-sm whitespace-pre-line text-justify'
                                     : 'bg-indigo-600 text-white rounded-tr-sm shadow-indigo-500/20'
                                     }`}>
                                     {isAI && msg.isTyping && isLast ? (
