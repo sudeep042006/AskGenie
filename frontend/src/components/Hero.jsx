@@ -99,11 +99,11 @@ export default function Hero({ onBotCreated, userId }) {
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-medium uppercase tracking-wider">
               <Sparkles size={12} /> AI-Powered
             </div>
-            <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-white via-indigo-100 to-purple-200 bg-clip-text text-transparent">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold bg-gradient-to-r from-white via-indigo-100 to-purple-200 bg-clip-text text-transparent text-center leading-tight">
               Website into AI
             </h1>
-            <p className="text-slate-400 text-lg max-w-lg mx-auto leading-relaxed">
-              Paste your website link and let AskGenie build a custom AI assistant trained on your content in seconds.
+            <p className="mt-4 text-sm sm:text-base md:text-lg text-center opacity-80 px-4">
+              Paste your website link and let AskGenie build a custom AI chatbot trained on your content.
             </p>
           </div>
 
