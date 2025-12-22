@@ -4,6 +4,7 @@ import { Send, Plus, History, MessageSquare, ChevronLeft, MoreVertical } from 'l
 import { chatbotApi } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import GenieAvatar from './GenieAvatar';
+import Loader from './Loader';
 
 // Reuse Typewriter for consistency
 const TypewriterText = ({ text, onComplete }) => {
@@ -42,6 +43,7 @@ const ChatInterface = () => {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState('');
     const [loading, setLoading] = useState(false);
+    const [historyLoading, setHistoryLoading] = useState(false); // New State
     const [answering, setAnswering] = useState(false);
     const [sidebarOpen, setSidebarOpen] = useState(false); // For mobile/history drawer
     const [conversations, setConversations] = useState([]); // History list
@@ -56,6 +58,7 @@ const ChatInterface = () => {
     }, [chatbotId, user]);
 
     const loadConversations = async () => {
+        setHistoryLoading(true);
         try {
             const res = await chatbotApi.getConversations(chatbotId, user.id);
             const convs = res.data || [];
@@ -66,12 +69,13 @@ const ChatInterface = () => {
                 // Load the most recent one by default
                 selectConversation(convs[0]);
             } else {
-                // No history, start fresh state
                 setActiveConversation(null);
                 setMessages([]);
             }
         } catch (err) {
             console.error("Failed to load history", err);
+        } finally {
+            setHistoryLoading(false);
         }
     };
 
@@ -168,7 +172,13 @@ const ChatInterface = () => {
                     </button>
                 </div>
                 <div className="flex-1 overflow-y-auto p-2 space-y-1 custom-scrollbar">
-                    {conversations.map(conv => (
+                    {historyLoading ? (
+                        <div className="space-y-3 px-2 mt-2">
+                            <Loader type="line" count={1} className="h-6 w-3/4 opacity-20" />
+                            <Loader type="line" count={1} className="h-6 w-1/2 opacity-10" />
+                            <Loader type="line" count={1} className="h-6 w-2/3 opacity-15" />
+                        </div>
+                    ) : conversations.map(conv => (
                         <button
                             key={conv._id}
                             onClick={() => selectConversation(conv)}

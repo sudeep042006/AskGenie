@@ -15,15 +15,18 @@ import { chatbotApi } from './services/api';
 function MainLayout() {
   const { user, logout } = useAuth();
   const [bots, setBots] = React.useState([]);
+  const [loading, setLoading] = React.useState(true); // Add loading state
   const [isMobileNavOpen, setMobileNavOpen] = useState(false);
   const navigate = useNavigate();
 
   // Load Bots for Sidebar
   React.useEffect(() => {
     if (user?.id) {
+      setLoading(true);
       chatbotApi.fetchUserBots(user.id)
         .then(res => setBots(res.data || []))
-        .catch(err => console.error(err));
+        .catch(err => console.error(err))
+        .finally(() => setLoading(false));
     }
   }, [user]);
 
@@ -48,6 +51,7 @@ function MainLayout() {
       {/* Global Sidebar - Always visible */}
       <Sidebar
         bots={bots}
+        isLoading={loading}
         isOpen={isMobileNavOpen}
         onClose={() => setMobileNavOpen(false)}
         onSelectBot={(bot) => {

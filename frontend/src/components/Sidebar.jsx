@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Plus, LayoutGrid, Settings, HelpCircle, Trash2, MessageSquare, Clock, AlertCircle, LogOut } from 'lucide-react';
 import logo from '../assets/logo_ag_only.png';
+import Loader from './Loader';
 
 import { useNavigate } from 'react-router-dom';
 
-const Sidebar = ({ bots, onSelectBot, onNewChat, onDeleteBot, onLogout, isOpen, onClose }) => {
+const Sidebar = ({ bots, isLoading, onSelectBot, onNewChat, onDeleteBot, onLogout, isOpen, onClose }) => {
   const navigate = useNavigate();
   const [hoveredBot, setHoveredBot] = useState(null);
   const [deletingId, setDeletingId] = useState(null);
@@ -108,7 +109,31 @@ const Sidebar = ({ bots, onSelectBot, onNewChat, onDeleteBot, onLogout, isOpen, 
 
           {/* Bots List */}
           <div className="flex-1 overflow-y-auto pr-1 space-y-2 -mr-2 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent">
-            {bots.length === 0 ? (
+            {isLoading ? (
+              <div className="space-y-3 pt-2">
+                <div className="flex items-center gap-3 px-2">
+                  <div className="w-8 h-8 rounded-lg bg-white/5 animate-pulse" />
+                  <div className="flex-1 space-y-2">
+                    <Loader type="line" count={1} className="h-4 w-3/4 opacity-30" />
+                    <Loader type="line" count={1} className="h-2 w-1/2 opacity-20" />
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 px-2">
+                  <div className="w-8 h-8 rounded-lg bg-white/5 animate-pulse" />
+                  <div className="flex-1 space-y-2">
+                    <Loader type="line" count={1} className="h-4 w-2/3 opacity-30" />
+                    <Loader type="line" count={1} className="h-2 w-1/2 opacity-20" />
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 px-2">
+                  <div className="w-8 h-8 rounded-lg bg-white/5 animate-pulse" />
+                  <div className="flex-1 space-y-2">
+                    <Loader type="line" count={1} className="h-4 w-3/4 opacity-30" />
+                    <Loader type="line" count={1} className="h-2 w-1/2 opacity-20" />
+                  </div>
+                </div>
+              </div>
+            ) : bots.length === 0 ? (
               <div className="text-center text-slate-600 text-xs py-12 px-4 border border-dashed border-slate-800 rounded-2xl bg-slate-900/30">
                 <MessageSquare size={24} className="mx-auto mb-3 opacity-30" />
                 <p>No chatbots yet.</p>
