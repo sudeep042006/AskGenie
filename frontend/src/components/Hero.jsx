@@ -54,7 +54,7 @@ export default function Hero({ onBotCreated, userId }) {
     simulateProgress();
 
     try {
-      const { data } = chatbotApi.createBot({
+      const { data } = await chatbotApi.createBot({
         url,
         userId,
         name: url.replace(/^https?:\/\//, '').split('/')[0] // Simple name derivation
@@ -118,7 +118,7 @@ export default function Hero({ onBotCreated, userId }) {
             </div>
 
             <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold bg-gradient-to-r from-white via-indigo-100 to-purple-200 bg-clip-text text-transparent text-center leading-tight">
-              Website into AI
+              Website into AI ChatBot
             </h1>
             <p className="mt-4 text-sm sm:text-base md:text-lg text-center opacity-80 px-4">
               Paste your website link and let AskGenie build a custom AI chatbot trained on your content.

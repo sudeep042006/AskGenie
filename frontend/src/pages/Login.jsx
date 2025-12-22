@@ -79,10 +79,13 @@ export default function Login() {
                             </div>
                         </div>
                     </div>
-                    <h2 className="text-4xl font-bold bg-gradient-to-r from-white via-indigo-100 to-indigo-200 bg-clip-text text-transparent mb-2 text-center">
+                    <h2 className="text-2xl font-bold bg-gradient-to-r from-white via-indigo-100 to-indigo-200 bg-clip-text text-transparent mb-2 text-center text-slate-50">
                         Welcome Back To AskGenie
                     </h2>
-                    <p className="text-slate-400">Enter the portal to your AI assistants</p>
+                    <p className="text-slate-300"> Explore Ready Made Chatbots here</p>
+                    <p className="text-slate-500"> Email:- sudeepkuralkar02@gmail.com</p>
+                    <p className="text-slate-500"> Password:- abcd1234</p>
+                    
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-5">
