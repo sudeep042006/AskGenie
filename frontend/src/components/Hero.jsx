@@ -109,22 +109,24 @@ export default function Hero({ onBotCreated, userId }) {
 
           <form onSubmit={handleCreate} className="relative w-full max-w-lg mx-auto group">
             <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-2xl blur opacity-25 group-hover:opacity-40 transition-opacity duration-500"></div>
-            <div className="relative flex items-center bg-slate-900/80 backdrop-blur-xl border border-white/10 rounded-2xl p-2 shadow-2xl">
-              <div className="pl-4 text-slate-500">
-                <Globe size={20} />
+            <div className="relative flex flex-col sm:flex-row items-center bg-slate-900/80 backdrop-blur-xl border border-white/10 rounded-2xl p-2 shadow-2xl gap-2 sm:gap-0">
+              <div className="flex items-center w-full sm:flex-1">
+                <div className="pl-4 text-slate-500">
+                  <Globe size={20} />
+                </div>
+                <input
+                  type="url"
+                  value={url}
+                  onChange={(e) => setUrl(e.target.value)}
+                  placeholder="https://example.com"
+                  className="flex-1 bg-transparent border-none outline-none text-white placeholder:text-slate-600 focus:ring-0 px-4 py-3 text-base min-w-0"
+                  required
+                />
               </div>
-              <input
-                type="url"
-                value={url}
-                onChange={(e) => setUrl(e.target.value)}
-                placeholder="https://example.com"
-                className="flex-1 bg-transparent border-none outline-none text-white placeholder:text-slate-600 focus:ring-0 px-4 py-3 text-base"
-                required
-              />
               <button
                 type="submit"
                 disabled={!url}
-                className="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white rounded-xl font-medium shadow-lg shadow-indigo-500/20 transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white rounded-xl font-medium shadow-lg shadow-indigo-500/20 transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 Create <ChevronRight size={18} />
               </button>
