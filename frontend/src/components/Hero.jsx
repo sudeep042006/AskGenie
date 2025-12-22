@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Search, Globe, ChevronRight, Zap, CheckCircle2, Loader2, Sparkles, AlertCircle } from 'lucide-react';
 import { chatbotApi } from '../services/api';
+import logo_ag_only from "../assets/logo_ag_only.png";
 
 export default function Hero({ onBotCreated, userId }) {
   const [url, setUrl] = useState('');
@@ -53,7 +54,7 @@ export default function Hero({ onBotCreated, userId }) {
     simulateProgress();
 
     try {
-      const { data } = await chatbotApi.createBot({
+      const { data } = chatbotApi.createBot({
         url,
         userId,
         name: url.replace(/^https?:\/\//, '').split('/')[0] // Simple name derivation
@@ -96,9 +97,26 @@ export default function Hero({ onBotCreated, userId }) {
       {status === 'idle' && (
         <div className="space-y-8 animate-in fade-in zoom-in duration-500">
           <div className="space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-medium uppercase tracking-wider">
-              <Sparkles size={12} /> AI-Powered
+            {/* Large Premium Logo */}
+            <div className="relative w-32 h-32 flex items-center justify-center mx-auto mb-6">
+              {/* Rotating Ring */}
+              <div className="absolute -inset-4 rounded-full border border-indigo-500/40 shadow-[0_0_30px_rgba(99,102,241,0.3)] animate-[spin_10s_linear_infinite]"></div>
+
+              {/* Static Middle Ring */}
+              <div className="absolute -inset-1 rounded-full border border-white/5"></div>
+
+              {/* Logo Container */}
+              <div className="w-full h-full rounded-full overflow-hidden bg-black border border-white/10 flex items-center justify-center relative z-10 shadow-2xl">
+                <img src={logo_ag_only} alt="AI" className="w-full h-full object-contain p-2 mix-blend-screen opacity-100" />
+                <div className="absolute inset-0 bg-radial-gradient from-transparent via-transparent to-black pointer-events-none"></div>
+              </div>
             </div>
+
+            {/* AI Powered Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-sm font-bold uppercase tracking-widest shadow-[0_0_20px_rgba(99,102,241,0.2)] mb-4">
+              <Sparkles size={14} className="animate-pulse" /> AI-POWERED
+            </div>
+
             <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold bg-gradient-to-r from-white via-indigo-100 to-purple-200 bg-clip-text text-transparent text-center leading-tight">
               Website into AI
             </h1>

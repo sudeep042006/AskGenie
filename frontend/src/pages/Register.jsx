@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 import { Sparkles, ArrowRight, Lock, Mail, User } from 'lucide-react';
+import logo_ag_only from "../assets/logo_ag_only.png";
 
 export default function Register() {
     const [email, setEmail] = useState('');
@@ -43,8 +44,30 @@ export default function Register() {
 
             <div className="w-full max-w-md p-8 relative z-10">
                 <div className="text-center mb-10">
-                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-500/20 to-purple-500/20 border border-pink-500/30 backdrop-blur-xl mb-6 shadow-[0_0_40px_-10px_rgba(236,72,153,0.3)]">
-                        <Sparkles className="w-8 h-8 text-pink-400" />
+                    {/* Pink Circular Logo Container */}
+                    <div className="relative flex items-center justify-center mb-10">
+                        {/* Anchor */}
+                        <div className="relative w-24 h-24 flex items-center justify-center">
+                            {/* Ring 3: Outer GLOWING & ROTATING (Slow) - Pink */}
+                            <div className="absolute -inset-6 rounded-full border border-pink-500/20 border-t-pink-500/60 shadow-[0_0_30px_rgba(236,72,153,0.15)] animate-[spin_12s_linear_infinite]"></div>
+
+                            {/* Ring 2: Middle Static */}
+                            <div className="absolute -inset-3 rounded-full border border-white/5"></div>
+
+                            {/* Ring 1: Inner - Pink */}
+                            <div className="absolute inset-0 rounded-full border border-pink-400/20 shadow-[inset_0_0_15px_rgba(236,72,153,0.2)] z-20 pointer-events-none"></div>
+
+                            {/* Masked Logo */}
+                            <div className="w-full h-full rounded-full overflow-hidden bg-slate-950/50 backdrop-blur-xl border border-white/10 shadow-2xl relative z-10 flex items-center justify-center group">
+                                <img
+                                    src={logo_ag_only}
+                                    alt="AskGenie"
+                                    className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110 opacity-90"
+                                />
+                                {/* Glossy Overlay */}
+                                <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+                            </div>
+                        </div>
                     </div>
                     <h2 className="text-4xl font-bold bg-gradient-to-r from-white via-pink-100 to-purple-200 bg-clip-text text-transparent mb-2">
                         Join AskGenie
