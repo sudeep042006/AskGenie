@@ -43,10 +43,11 @@ const ChatInterface = () => {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState('');
     const [loading, setLoading] = useState(false);
-    const [historyLoading, setHistoryLoading] = useState(false); // New State
+    const [historyLoading, setHistoryLoading] = useState(false); // Sidebar loading
+    const [isFetchingHistory, setIsFetchingHistory] = useState(false); // Chat window loader
     const [answering, setAnswering] = useState(false);
-    const [sidebarOpen, setSidebarOpen] = useState(false); // For mobile/history drawer
-    const [conversations, setConversations] = useState([]); // History list
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [conversations, setConversations] = useState([]);
 
     const scrollRef = useRef();
 
@@ -82,13 +83,19 @@ const ChatInterface = () => {
     const selectConversation = async (conv) => {
         try {
             setActiveConversation(conv);
-            // Fetch messages
+            setMessages([]); // Clear previous messages immediately
+            setIsFetchingHistory(true); // Start sliding loader
+
+            // Artificial delay for smoothness if desired, or just fetch
+            // await new Promise(r => setTimeout(r, 150)); 
+
             const res = await chatbotApi.getMessages(conv._id);
             setMessages(res.data || []);
-            // Close sidebar if mobile
             setSidebarOpen(false);
         } catch (err) {
             console.error("Failed to load messages", err);
+        } finally {
+            setIsFetchingHistory(false); // Stop loader
         }
     };
 
@@ -207,8 +214,22 @@ const ChatInterface = () => {
                 {/* Messages Container */}
                 <div className="flex-1 overflow-y-auto px-4 py-6 md:px-20 lg:px-40 space-y-8 custom-scrollbar scroll-smooth">
 
-                    {/* Empty State */}
-                    {messages.length === 0 && (
+                    {/* Gemini-Style Sliding Loader (Chat History) */}
+                    {isFetchingHistory && (
+                        <div className="w-full px-4 md:px-20 lg:px-40 mt-10">
+                            <div className="chat-history-loader" style={{
+                                width: '100%',
+                                height: '4px',
+                                background: 'linear-gradient(90deg, transparent, #6366f1, transparent)',
+                                backgroundSize: '200% 100%',
+                                animation: 'slide 1.5s infinite linear',
+                                borderRadius: '999px'
+                            }} />
+                        </div>
+                    )}
+
+                    {/* Empty State (Only if not fetching history) */}
+                    {!isFetchingHistory && messages.length === 0 && (
                         <div className="flex flex-col items-center justify-center h-full opacity-50 animate-in zoom-in duration-500">
                             <GenieAvatar state="idle" size="lg" />
                             <h2 className="mt-6 text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400">
@@ -218,8 +239,8 @@ const ChatInterface = () => {
                         </div>
                     )}
 
-                    {/* Messages */}
-                    {messages.map((msg, idx) => {
+                    {/* Messages (Only if not fetching history) */}
+                    {!isFetchingHistory && messages.map((msg, idx) => {
                         const isLast = idx === messages.length - 1;
                         const isAI = msg.role === 'ai';
                         return (
