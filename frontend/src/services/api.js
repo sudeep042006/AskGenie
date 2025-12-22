@@ -59,5 +59,8 @@ export const chatbotApi = {
             console.warn('getHistory not available or failed', err?.response?.data || err.message || err);
             throw err;
         }
-    }
+    },
+
+    // Delete a conversation
+    deleteConversation: (conversationId) => api.delete(`/conversation/${conversationId}`),
 };

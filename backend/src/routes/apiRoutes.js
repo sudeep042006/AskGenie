@@ -5,7 +5,8 @@ import {
     askQuestion,
     createConversation,
     getConversations,
-    getConversationMessages
+    getConversationMessages,
+    deleteConversation
 } from '../controllers/chatController.js';
 import Chatbot from '../models/chatbot.js'; // Import this to list the bots
 
@@ -49,5 +50,6 @@ router.delete('/chatbot/:chatbotId', deleteChatbot);
 router.post('/conversation', createConversation);
 router.get('/conversations/:chatbotId/:userId', getConversations);
 router.get('/messages/:conversationId', getConversationMessages);
+router.delete('/conversation/:conversationId', deleteConversation);
 
 export default router;

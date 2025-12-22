@@ -40,6 +40,18 @@ export async function getConversationMessages(req, res) {
     }
 }
 
+// 4. Delete a conversation
+export async function deleteConversation(req, res) {
+    const { conversationId } = req.params;
+    try {
+        await Message.deleteMany({ conversationId });
+        await Conversation.findByIdAndDelete(conversationId);
+        res.json({ message: "Conversation deleted successfully" });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+
 // --- CHAT LOGIC ---
 
 // ... (previous code)

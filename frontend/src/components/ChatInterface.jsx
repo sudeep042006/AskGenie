@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Send, Plus, History, MessageSquare, ChevronLeft, MoreVertical } from 'lucide-react';
+import { Send, Plus, History, MessageSquare, ChevronLeft, MoreVertical, Trash2 } from 'lucide-react';
 import { chatbotApi } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import GenieAvatar from './GenieAvatar';
@@ -106,6 +106,22 @@ const ChatInterface = () => {
     };
 
     // 2. Sending Messages
+    const handleDeleteConversation = async (e, convId) => {
+        e.stopPropagation();
+        if (!window.confirm("Delete this conversation?")) return;
+
+        try {
+            await chatbotApi.deleteConversation(convId);
+            setConversations(prev => prev.filter(c => c._id !== convId));
+            if (activeConversation?._id === convId) {
+                setActiveConversation(null);
+                setMessages([]);
+            }
+        } catch (err) {
+            console.error("Failed to delete conversation:", err);
+        }
+    };
+
     const handleSend = async () => {
         if (!input.trim() || loading || answering) return;
 
@@ -197,16 +213,27 @@ const ChatInterface = () => {
                             <Loader type="line" count={1} className="h-6 w-2/3 opacity-15" />
                         </div>
                     ) : conversations.map(conv => (
-                        <button
+                        <div
                             key={conv._id}
-                            onClick={() => selectConversation(conv)}
-                            className={`w-full text-left p-3 rounded-xl text-sm truncate transition-all ${activeConversation?._id === conv._id
+                            className={`group w-full flex items-center gap-2 p-3 rounded-xl transition-all ${activeConversation?._id === conv._id
                                 ? 'bg-white/10 text-white'
                                 : 'text-slate-400 hover:bg-white/5 hover:text-slate-200'
                                 }`}
                         >
-                            {conv.title || "New Conversation"}
-                        </button>
+                            <button
+                                onClick={() => selectConversation(conv)}
+                                className="flex-1 text-left text-sm truncate"
+                            >
+                                {conv.title || "New Conversation"}
+                            </button>
+                            <button
+                                onClick={(e) => handleDeleteConversation(e, conv._id)}
+                                className="opacity-0 group-hover:opacity-100 p-1.5 hover:bg-red-500/20 hover:text-red-400 rounded-lg transition-all"
+                                title="Delete Conversation"
+                            >
+                                <Trash2 size={14} />
+                            </button>
+                        </div>
                     ))}
                 </div>
             </div>
