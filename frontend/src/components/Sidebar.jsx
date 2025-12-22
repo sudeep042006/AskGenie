@@ -56,7 +56,7 @@ const Sidebar = ({ bots, isLoading, onSelectBot, onNewChat, onDeleteBot, onLogou
 
       <aside
         className={`
-          fixed md:relative inset-y-0 left-0 w-72 h-screen p-4 flex flex-col gap-4 z-[100] 
+          fixed md:relative inset-y-0 left-0 w-72 h-[100dvh] p-4 pb-12 md:pb-4 flex flex-col gap-4 z-[100] 
           transition-transform duration-300 ease-in-out
           ${isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
         `}
