@@ -181,14 +181,14 @@ const Sidebar = ({ bots, isLoading, onSelectBot, onNewChat, onDeleteBot, onLogou
           </div>
 
           {/* Footer */}
-          <div className="pt-4 mt-auto border-t border-white/5 space-y-1">
+          <div className="pt-4 mt-auto border-t border-white/5 space-y-1 mb-6 md:mb-0">
             <button
               onClick={() => handleNavigation('/settings')}
-              className="w-full flex items-center gap-3 p-2.5 text-sm text-slate-400 hover:text-white hover:bg-white/5 rounded-xl transition-colors"
+              className="w-full flex items-center gap-3 p-2 text-sm text-slate-400 hover:text-white hover:bg-white/5 rounded-xl transition-colors"
             >
               <Settings size={16} /> Settings
             </button>
-            <button onClick={onLogout} className="w-full flex items-center gap-3 p-2.5 text-sm text-red-400/80 hover:text-red-400 hover:bg-red-500/10 rounded-xl transition-colors">
+            <button onClick={onLogout} className="w-full flex items-center gap-3 p-2 text-sm text-red-400/80 hover:text-red-400 hover:bg-red-500/10 rounded-xl transition-colors">
               <LogOut size={16} /> Sign Out
             </button>
           </div>
