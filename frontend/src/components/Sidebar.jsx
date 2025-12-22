@@ -46,18 +46,22 @@ const Sidebar = ({ bots, isLoading, onSelectBot, onNewChat, onDeleteBot, onLogou
   return (
     <>
       {/* Mobile Overlay */}
+      {/* Mobile Overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-30 md:hidden"
-        /* onClick={onClose} - Removed to prevent auto-close on content click */
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[90] md:hidden"
+          onClick={onClose}
         />
       )}
 
-      <aside className={`
-        fixed md:relative inset-y-0 left-0 w-72 h-screen p-4 flex flex-col gap-4 z-40 
-        transition-transform duration-300 ease-in-out
-        ${isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
-      `}>
+      <aside
+        className={`
+          fixed md:relative inset-y-0 left-0 w-72 h-screen p-4 flex flex-col gap-4 z-[100] 
+          transition-transform duration-300 ease-in-out
+          ${isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
+        `}
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="glass-card rounded-[2rem] p-5 flex flex-col h-full bg-slate-900/60 backdrop-blur-2xl border border-white/10 shadow-2xl">
 
           {/* LOGO AREA */}
