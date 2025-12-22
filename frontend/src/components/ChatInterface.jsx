@@ -214,16 +214,19 @@ const ChatInterface = () => {
             {/* --- MAIN CHAT AREA --- */}
             <div className="flex-1 flex flex-col relative bg-gradient-to-br from-slate-950 via-slate-900 to-black w-full">
 
+                {/* Mobile Blurred Header Bar */}
+                <div className="absolute top-0 left-0 right-0 h-20 bg-slate-950/80 backdrop-blur-xl border-b border-white/5 z-30 lg:hidden"></div>
+
                 {/* Toggle History Button (Mobile) */}
                 <button
                     onClick={() => setSidebarOpen(!sidebarOpen)}
-                    className={`absolute top-6 left-20 z-40 lg:hidden p-2 rounded-lg bg-slate-800 text-slate-400`}
+                    className={`absolute top-6 left-20 z-40 lg:hidden p-2 rounded-lg bg-slate-800 text-slate-400 border border-white/10`}
                 >
                     <History size={20} />
                 </button>
 
                 {/* Messages Container */}
-                <div className="flex-1 overflow-y-auto px-4 py-6 md:px-20 lg:px-40 space-y-8 custom-scrollbar scroll-smooth">
+                <div className="flex-1 overflow-y-auto px-4 pt-24 pb-6 md:px-20 md:pt-6 lg:px-40 space-y-8 custom-scrollbar scroll-smooth">
 
                     {/* Gemini-Style Sliding Loader (Chat History) */}
                     {isFetchingHistory && (
